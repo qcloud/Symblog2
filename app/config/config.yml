@@ -74,3 +74,11 @@ services:
       tags:
           - { name: twig.extension }
 
+
+# Doctrine Extension Configuration
+
+stof_doctrine_extensions:
+    orm:
+        default:
+            timestampable: true
+            sluggable: true
