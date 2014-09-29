@@ -1,0 +1,21 @@
+.post-subtitle {
+    text-align: justify;
+    font-size: 22px;
+    font-weight: 400;
+}
+
+.post-title {
+    font-weight: 800;
+}
+
+a.read-more {
+    text-decoration: none !important;
+}
+
+.latestPosts li {
+    list-style-type: none;
+}
+
+.latestPosts {
+    font-size: 16px;
+}

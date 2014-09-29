@@ -1,0 +1,31 @@
+{% extends "CoreBundle::layout.html.twig" %}
+
+{% block header %}
+    <header class="intro-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Symblog</h1>
+                        <hr class="small">
+                        <span class="subheading">A blogging system powered by Symfony2</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+{% block mainContainer %}
+    {% for post in posts %}
+        {{ include('CoreBundle:Post:_post.html.twig',{post:post}) }}
+    {% endfor %}
+{% endblock %}
+{% block latestPosts %}
+    <h3>{{ 'post.latest' | trans }}</h3>
+    <ul class="latestPosts nav nav-stacked" id="sidebar">
+        {% for post in latestPosts %}
+            <li><a href="#">{{ post.title }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
