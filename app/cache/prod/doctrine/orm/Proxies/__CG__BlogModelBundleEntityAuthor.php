@@ -265,4 +265,26 @@ class Author extends \Blog\ModelBundle\Entity\Author implements \Doctrine\ORM\Pr
         return parent::getCreatedAt();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUpdatedAt', array($updatedAt));
+
+        return parent::setUpdatedAt($updatedAt);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUpdatedAt()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUpdatedAt', array());
+
+        return parent::getUpdatedAt();
+    }
+
 }

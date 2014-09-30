@@ -64,10 +64,10 @@ class Post extends \Blog\ModelBundle\Entity\Post implements \Doctrine\ORM\Proxy\
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', '' . "\0" . 'Blog\\ModelBundle\\Entity\\Post' . "\0" . 'id', '' . "\0" . 'Blog\\ModelBundle\\Entity\\Post' . "\0" . 'title', '' . "\0" . 'Blog\\ModelBundle\\Entity\\Post' . "\0" . 'body', '' . "\0" . 'Blog\\ModelBundle\\Entity\\Post' . "\0" . 'author');
+            return array('__isInitialized__', '' . "\0" . 'Blog\\ModelBundle\\Entity\\Post' . "\0" . 'id', '' . "\0" . 'Blog\\ModelBundle\\Entity\\Post' . "\0" . 'title', '' . "\0" . 'Blog\\ModelBundle\\Entity\\Post' . "\0" . 'slug', '' . "\0" . 'Blog\\ModelBundle\\Entity\\Post' . "\0" . 'body', '' . "\0" . 'Blog\\ModelBundle\\Entity\\Post' . "\0" . 'author');
         }
 
-        return array('__isInitialized__', '' . "\0" . 'Blog\\ModelBundle\\Entity\\Post' . "\0" . 'id', '' . "\0" . 'Blog\\ModelBundle\\Entity\\Post' . "\0" . 'title', '' . "\0" . 'Blog\\ModelBundle\\Entity\\Post' . "\0" . 'body', '' . "\0" . 'Blog\\ModelBundle\\Entity\\Post' . "\0" . 'author');
+        return array('__isInitialized__', '' . "\0" . 'Blog\\ModelBundle\\Entity\\Post' . "\0" . 'id', '' . "\0" . 'Blog\\ModelBundle\\Entity\\Post' . "\0" . 'title', '' . "\0" . 'Blog\\ModelBundle\\Entity\\Post' . "\0" . 'slug', '' . "\0" . 'Blog\\ModelBundle\\Entity\\Post' . "\0" . 'body', '' . "\0" . 'Blog\\ModelBundle\\Entity\\Post' . "\0" . 'author');
     }
 
     /**
@@ -213,6 +213,28 @@ class Post extends \Blog\ModelBundle\Entity\Post implements \Doctrine\ORM\Proxy\
     /**
      * {@inheritDoc}
      */
+    public function setSlug($slug)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setSlug', array($slug));
+
+        return parent::setSlug($slug);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSlug()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSlug', array());
+
+        return parent::getSlug();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function setBody($body)
     {
 
@@ -274,6 +296,28 @@ class Post extends \Blog\ModelBundle\Entity\Post implements \Doctrine\ORM\Proxy\
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCreatedAt', array());
 
         return parent::getCreatedAt();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUpdatedAt', array($updatedAt));
+
+        return parent::setUpdatedAt($updatedAt);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUpdatedAt()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUpdatedAt', array());
+
+        return parent::getUpdatedAt();
     }
 
 }

@@ -19,3 +19,11 @@ a.read-more {
 .latestPosts {
     font-size: 16px;
 }
+
+.post-header {
+    background: url("../images/post-bg.jpg") no-repeat;
+}
+
+a.read-more {
+    color: #0085a1;
+}

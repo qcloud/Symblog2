@@ -37,13 +37,10 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="#">Home</a>
+                        <a href="{{ path('blog_core_post_index') }}">Home</a>
                     </li>
                     <li>
                         <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Sample Post</a>
                     </li>
                     <li>
                         <a href="#">Contact</a>
@@ -65,13 +62,14 @@
         <div class="col-lg-8">
 
             {% block mainContainer %}
+                <!-- Pager -->
+                <ul class="pager">
+                    <li class="next">
+                        <a href="#">Older Posts &rarr;</a>
+                    </li>
+                </ul>
             {% endblock %}
-            <!-- Pager -->
-            <ul class="pager">
-                <li class="next">
-                    <a href="#">Older Posts &rarr;</a>
-                </li>
-            </ul>
+
         </div>
         <div class="col-lg-2 col-lg-offset-2">
             {% block latestPosts %}

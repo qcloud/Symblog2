@@ -4,9 +4,12 @@
     </h2>
 
     <h3 class="post-subtitle">
-        {{ post.body | truncate(200) }} &#8212; <a class="read-more" href="#">{{ 'read.more' | trans }} &raquo;</a>
+        <p>{{ post.body | truncate(200) }}</p><a class="read-more"
+                                                 href="{{ path('blog_core_post_show',{slug: post.slug}) }}">{{ 'read.more' | trans }} &raquo;</a>
     </h3>
 
-    <p class="post-meta">Posted by <a href="#">{{ post.author.name }}</a> on {{ post.createdAt | date }} </p>
+    <p class="post-meta">Posted by <a
+                href="{{ path('blog_core_author_show',{slug: post.author.slug}) }}">{{ post.author.name }}</a>
+        on {{ post.createdAt | date('m-d-y') }} </p>
 </div>
 <hr>

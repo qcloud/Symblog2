@@ -2,6 +2,7 @@
 
 namespace Blog\ModelBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -57,6 +58,23 @@ class Post extends Timestampable
      * @Assert\NotBlank
      */
     private $author;
+
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="post", cascade={"remove"})
+     */
+    private $comments;
+
+
+    /**
+     * Constructor
+     *
+     */
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
 
 
     /**
@@ -163,5 +181,40 @@ class Post extends Timestampable
     public function getAuthor()
     {
         return $this->author;
+    }
+
+
+    /**
+     * Add comments
+     *
+     * @param Comment $comments
+     *
+     * @return Post
+     */
+    public function addComment(Comment $comments)
+    {
+        $this->comments[] = $comments;
+
+        return $this;
+    }
+
+    /**
+     * Remove comments
+     *
+     * @param Comment $comments
+     */
+    public function removeComment(Comment $comments)
+    {
+        $this->comments->removeElement($comments);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }
