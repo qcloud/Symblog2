@@ -27,4 +27,49 @@
             </div>
         </div>
     </article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <a id="comments"></a>
+
+                <h3 class="comment-header">Comments</h3>
+                {% for comment in post.comments %}
+                    {{ include('CoreBundle:Post:_comment.html.twig',{ comment: comment }) }}
+                {% endfor %}
+                <h4>Write a comment:</h4>
+                {#{{ form(commentForm, {action: path('blog_core_post_createcomment',{slug: post.slug}) ~ '#comments'}) }}#}
+                <div class="panel-body">
+                    <form class="form-horizontal" action="{{ path('blog_core_post_createcomment',{slug: post.slug}) }}">
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="inputName">Name</label>
+
+                            <div class="col-lg-8">
+                                {{ form_widget(commentForm.authorName, {'attr': {'class': 'form-control form-control-trans','placeholder':'Name' }}
+                                ) }}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="inputName">Body</label>
+
+                            <div class="col-lg-8">
+                                {{ form_widget(commentForm.body, {'attr': {'class': 'form-control form-control-trans','placeholder':'Body','rows':10 }}
+                                ) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="inputName"></label>
+
+                            <div class="col-lg-8">
+                                <input class="btn btn-default" type="submit" value="Send"/>
+                                {#{{ form_widget(commentForm.send, {'attr': {'class': 'btn btn-defult'}}#}
+                                {{ form_widget(commentForm._token) }}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

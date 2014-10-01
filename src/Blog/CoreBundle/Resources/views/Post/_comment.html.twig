@@ -1,0 +1,5 @@
+<article class="comment">
+    <header><p>On {{ comment.createdAt | date('m/d/y') }} by {{ comment.authorName }}</p></header>
+    <blockquote class="comments text-justify">{{ comment.body |nl2br }}</blockquote>
+
+</article>

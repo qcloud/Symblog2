@@ -27,3 +27,13 @@ a.read-more {
 a.read-more {
     color: #0085a1;
 }
+
+.comment-header {
+    font-weight: bloder;
+    font-size: 28pt;
+    color: #084c8d;
+}
+
+.comments {
+    font-size: 12pt;
+}

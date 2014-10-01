@@ -54,6 +54,11 @@
 {% endblock %}
 {% block header %}
     {# Header contents goes here. Individual to each pages #}
+    {% for type, message in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <p class="success">{{ message }}</p>
+        {% endfor %}
+    {% endfor %}
 {% endblock %}
 
 <!-- Main Content -->
