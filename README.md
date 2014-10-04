@@ -6,7 +6,7 @@ Symblog2 is influenced by the famous Symblog blogging application powered by Sym
 1) Installing Symblog2
 ----------------------------------
 
-* Install git client on your system and run `git clone https://github.com/qcloud/Symblog2.git`. 
+* Install git client on your system and run `git clone https://github.com/qcloud/Symblog2.git` from the terminal. You must be inside in your htdocs folder. 
 * After cloning is done, type `cd Symblog` and press enter. 
 * Then run `composer update` to install all the necessary bundles and dependencies along with SF2 framework itself.   
 * Then go to `Symblog/app/parameters.yml` and update your database credentials.
