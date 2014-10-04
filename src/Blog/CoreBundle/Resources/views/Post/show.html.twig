@@ -39,7 +39,8 @@
                 <h4>Write a comment:</h4>
                 {#{{ form(commentForm, {action: path('blog_core_post_createcomment',{slug: post.slug}) ~ '#comments'}) }}#}
                 <div class="panel-body">
-                    <form class="form-horizontal" action="{{ path('blog_core_post_createcomment',{slug: post.slug}) }}">
+                    <form class="form-horizontal" action="{{ path('blog_core_post_createcomment',{slug: post.slug}) }}"
+                          method="post">
                         <div class="form-group">
                             <label class="col-lg-2 control-label" for="inputName">Name</label>
 

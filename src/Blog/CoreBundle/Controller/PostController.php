@@ -80,7 +80,8 @@ class PostController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($comment);
+            $commentForm = $form->getData();
+            $em->persist($commentForm);
             $em->flush();
             $this->get('session')->getFlashBag()->add('success', 'Your comment was submitted successfully');
             return $this->redirect($this->generateUrl('blog_core_post_show', array('slug' => $post->getSlug())));
