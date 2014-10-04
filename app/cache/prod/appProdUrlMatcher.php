@@ -27,9 +27,17 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
         $context = $this->context;
         $request = $this->request;
 
-        // blog_model_default_index
-        if (0 === strpos($pathinfo, '/hello') && preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'blog_model_default_index')), array (  '_controller' => 'Blog\\ModelBundle\\Controller\\DefaultController::indexAction',));
+        if (0 === strpos($pathinfo, '/hello')) {
+            // blog_admin_default_index
+            if (preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'blog_admin_default_index')), array (  '_controller' => 'Blog\\AdminBundle\\Controller\\DefaultController::indexAction',));
+            }
+
+            // blog_model_default_index
+            if (preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'blog_model_default_index')), array (  '_controller' => 'Blog\\ModelBundle\\Controller\\DefaultController::indexAction',));
+            }
+
         }
 
         // blog_core_author_show
