@@ -1,14 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Shibly
- * Date: 10/4/2014
- * Time: 1:24 PM
- */
-
 namespace Blog\AdminBundle\Controller;
-
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
