@@ -75,4 +75,5 @@
   74 => 'Sensio\\Bundle\\FrameworkExtraBundle\\EventListener\\HttpCacheListener',
   75 => 'Sensio\\Bundle\\FrameworkExtraBundle\\EventListener\\SecurityListener',
   76 => 'Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\ConfigurationAnnotation',
+  77 => 'JMS\\DiExtraBundle\\HttpKernel\\ControllerResolver',
 );

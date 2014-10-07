@@ -10,6 +10,7 @@ class __TwigTemplate_47f06a3115408e6efaa8ba950c3ef09435da40c0300cef65670b9d33a3c
         $this->parent = $this->env->loadTemplate("ModelBundle::layout.html.twig");
 
         $this->blocks = array(
+            'title' => array($this, 'block_title'),
             'fos_user_content' => array($this, 'block_fos_user_content'),
         );
     }
@@ -24,10 +25,16 @@ class __TwigTemplate_47f06a3115408e6efaa8ba950c3ef09435da40c0300cef65670b9d33a3c
         $this->parent->display($context, array_merge($this->blocks, $blocks));
     }
 
-    // line 5
+    // line 4
+    public function block_title($context, array $blocks = array())
+    {
+        echo "Login";
+    }
+
+    // line 6
     public function block_fos_user_content($context, array $blocks = array())
     {
-        // line 6
+        // line 7
         echo "
     <div class=\"container\" style=\"margin-top: 40px;\">
         <div class=\"row\">
@@ -38,27 +45,27 @@ class __TwigTemplate_47f06a3115408e6efaa8ba950c3ef09435da40c0300cef65670b9d33a3c
                     </div>
                     <div class=\"panel-body\">
                         ";
-        // line 15
+        // line 16
         if ((isset($context["error"]) ? $context["error"] : $this->getContext($context, "error"))) {
-            // line 16
+            // line 17
             echo "                            <div class=\"bg-warning\">";
             echo twig_escape_filter($this->env, $this->env->getExtension('translator')->trans($this->getAttribute((isset($context["error"]) ? $context["error"] : $this->getContext($context, "error")), "messageKey"), $this->getAttribute((isset($context["error"]) ? $context["error"] : $this->getContext($context, "error")), "messageData"), "security"), "html", null, true);
             echo "</div>
                         ";
         }
-        // line 18
+        // line 19
         echo "                        <form action=\"";
         echo $this->env->getExtension('routing')->getPath("fos_user_security_check");
         echo "\" method=\"post\">
                             <input type=\"hidden\" name=\"_csrf_token\" value=\"";
-        // line 19
+        // line 20
         echo twig_escape_filter($this->env, (isset($context["csrf_token"]) ? $context["csrf_token"] : $this->getContext($context, "csrf_token")), "html", null, true);
         echo "\"/>
 
                             <div class=\"form-group\">
                                 <label class=\"control-label\" for=\"username\">Email</label>
                                 <input type=\"email\" id=\"username\" name=\"_username\" value=\"";
-        // line 23
+        // line 24
         echo twig_escape_filter($this->env, (isset($context["last_username"]) ? $context["last_username"] : $this->getContext($context, "last_username")), "html", null, true);
         echo "\"
                                        required=\"required\"
@@ -67,7 +74,7 @@ class __TwigTemplate_47f06a3115408e6efaa8ba950c3ef09435da40c0300cef65670b9d33a3c
                             <div class=\"form-group\">
                                 <label class=\"control-label\"
                                        for=\"password\">";
-        // line 29
+        // line 30
         echo twig_escape_filter($this->env, $this->env->getExtension('translator')->trans("security.login.password", array(), "FOSUserBundle"), "html", null, true);
         echo "</label>
                                 <input type=\"password\" name=\"_password\" required=\"required\" id=\"inputPassword\"
@@ -78,7 +85,7 @@ class __TwigTemplate_47f06a3115408e6efaa8ba950c3ef09435da40c0300cef65670b9d33a3c
                                 <label for=\"remember_me\">
                                     <input type=\"checkbox\" id=\"remember_me\" name=\"_remember_me\"
                                            value=\"on\"> ";
-        // line 37
+        // line 38
         echo twig_escape_filter($this->env, $this->env->getExtension('translator')->trans("security.login.remember_me", array(), "FOSUserBundle"), "html", null, true);
         echo "
                                 </label>
@@ -86,9 +93,14 @@ class __TwigTemplate_47f06a3115408e6efaa8ba950c3ef09435da40c0300cef65670b9d33a3c
 
                             <input class=\"btn btn-lg btn-success btn-block\" type=\"submit\" id=\"_submit\" name=\"_submit\"
                                    value=\"";
-        // line 42
+        // line 43
         echo twig_escape_filter($this->env, $this->env->getExtension('translator')->trans("security.login.submit", array(), "FOSUserBundle"), "html", null, true);
         echo "\"/>
+                            <a href=\"";
+        // line 44
+        echo $this->env->getExtension('routing')->getPath("fos_user_registration_register");
+        echo "\" class=\"btn btn-white btn-block\">Create
+                                an account</a>
                         </form>
                     </div>
                 </div>
@@ -110,6 +122,6 @@ class __TwigTemplate_47f06a3115408e6efaa8ba950c3ef09435da40c0300cef65670b9d33a3c
 
     public function getDebugInfo()
     {
-        return array (  90 => 42,  82 => 37,  71 => 29,  62 => 23,  55 => 19,  50 => 18,  44 => 16,  42 => 15,  31 => 6,  28 => 5,);
+        return array (  101 => 44,  97 => 43,  89 => 38,  78 => 30,  69 => 24,  62 => 20,  57 => 19,  51 => 17,  49 => 16,  38 => 7,  35 => 6,  29 => 4,);
     }
 }

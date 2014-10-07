@@ -4700,6 +4700,9 @@ protected $dateFormat;
 public function __construct($dateFormat = null)
 {
 $this->dateFormat = $dateFormat ?: static::SIMPLE_DATE;
+if (!function_exists('json_encode')) {
+throw new \RuntimeException('PHP\'s json extension is required to use Monolog\'s NormalizerFormatter');
+}
 }
 public function format(array $record)
 {
@@ -4783,10 +4786,12 @@ class LineFormatter extends NormalizerFormatter
 const SIMPLE_FORMAT ="[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n";
 protected $format;
 protected $allowInlineLineBreaks;
-public function __construct($format = null, $dateFormat = null, $allowInlineLineBreaks = false)
+protected $ignoreEmptyContextAndExtra;
+public function __construct($format = null, $dateFormat = null, $allowInlineLineBreaks = false, $ignoreEmptyContextAndExtra = false)
 {
 $this->format = $format ?: static::SIMPLE_FORMAT;
 $this->allowInlineLineBreaks = $allowInlineLineBreaks;
+$this->ignoreEmptyContextAndExtra = $ignoreEmptyContextAndExtra;
 parent::__construct($dateFormat);
 }
 public function format(array $record)
@@ -4797,6 +4802,16 @@ foreach ($vars['extra'] as $var => $val) {
 if (false !== strpos($output,'%extra.'.$var.'%')) {
 $output = str_replace('%extra.'.$var.'%', $this->replaceNewlines($this->convertToString($val)), $output);
 unset($vars['extra'][$var]);
+}
+}
+if ($this->ignoreEmptyContextAndExtra) {
+if (empty($vars['context'])) {
+unset($vars['context']);
+$output = str_replace('%context%','', $output);
+}
+if (empty($vars['extra'])) {
+unset($vars['extra']);
+$output = str_replace('%extra%','', $output);
 }
 }
 foreach ($vars as $var => $val) {
@@ -4842,7 +4857,7 @@ protected function replaceNewlines($str)
 if ($this->allowInlineLineBreaks) {
 return $str;
 }
-return preg_replace('{[\r\n]+}',' ', $str);
+return strtr($str, array("\r\n"=>' ',"\r"=>' ',"\n"=>' '));
 }
 }
 }
@@ -4873,7 +4888,7 @@ protected $formatter;
 protected $processors = array();
 public function __construct($level = Logger::DEBUG, $bubble = true)
 {
-$this->level = $level;
+$this->setLevel($level);
 $this->bubble = $bubble;
 }
 public function isHandling(array $record)
@@ -4918,7 +4933,7 @@ return $this->formatter;
 }
 public function setLevel($level)
 {
-$this->level = $level;
+$this->level = Logger::toMonologLevel($level);
 return $this;
 }
 public function getLevel()
@@ -4982,15 +4997,19 @@ protected $stream;
 protected $url;
 private $errorMessage;
 protected $filePermission;
-public function __construct($stream, $level = Logger::DEBUG, $bubble = true, $filePermission = null)
+protected $useLocking;
+public function __construct($stream, $level = Logger::DEBUG, $bubble = true, $filePermission = null, $useLocking = false)
 {
 parent::__construct($level, $bubble);
 if (is_resource($stream)) {
 $this->stream = $stream;
-} else {
+} elseif (is_string($stream)) {
 $this->url = $stream;
+} else {
+throw new \InvalidArgumentException('A stream must either be a resource or a string.');
 }
 $this->filePermission = $filePermission;
+$this->useLocking = $useLocking;
 }
 public function close()
 {
@@ -5017,7 +5036,13 @@ $this->stream = null;
 throw new \UnexpectedValueException(sprintf('The stream or file "%s" could not be opened: '.$this->errorMessage, $this->url));
 }
 }
+if ($this->useLocking) {
+flock($this->stream, LOCK_EX);
+}
 fwrite($this->stream, (string) $record['formatted']);
+if ($this->useLocking) {
+flock($this->stream, LOCK_UN);
+}
 }
 private function customErrorHandler($code, $msg)
 {
@@ -5039,7 +5064,7 @@ protected $bufferSize;
 protected $buffer = array();
 protected $stopBuffering;
 protected $passthruLevel;
-public function __construct($handler, $activationStrategy = null, $bufferSize = 0, $bubble = true, $stopBuffering = true, $passthruLevel = NULL)
+public function __construct($handler, $activationStrategy = null, $bufferSize = 0, $bubble = true, $stopBuffering = true, $passthruLevel = null)
 {
 if (null === $activationStrategy) {
 $activationStrategy = new ErrorLevelActivationStrategy(Logger::WARNING);
@@ -5093,7 +5118,7 @@ return false === $this->bubble;
 }
 public function close()
 {
-if (NULL !== $this->passthruLevel) {
+if (null !== $this->passthruLevel) {
 $level = $this->passthruLevel;
 $this->buffer = array_filter($this->buffer, function ($record) use ($level) {
 return $record['level'] >= $level;
@@ -5107,6 +5132,11 @@ $this->buffer = array();
 public function reset()
 {
 $this->buffering = true;
+}
+public function clear()
+{
+$this->buffer = array();
+$this->reset();
 }
 }
 }
@@ -5131,11 +5161,13 @@ return array_flip($this->acceptedLevels);
 public function setAcceptedLevels($minLevelOrList = Logger::DEBUG, $maxLevel = Logger::EMERGENCY)
 {
 if (is_array($minLevelOrList)) {
-$acceptedLevels = $minLevelOrList;
+$acceptedLevels = array_map('Monolog\Logger::toMonologLevel', $minLevelOrList);
 } else {
-$acceptedLevels = array_filter(Logger::getLevels(), function ($level) use ($minLevelOrList, $maxLevel) {
+$minLevelOrList = Logger::toMonologLevel($minLevelOrList);
+$maxLevel = Logger::toMonologLevel($maxLevel);
+$acceptedLevels = array_values(array_filter(Logger::getLevels(), function ($level) use ($minLevelOrList, $maxLevel) {
 return $level >= $minLevelOrList && $level <= $maxLevel;
-});
+}));
 }
 $this->acceptedLevels = array_flip($acceptedLevels);
 }
@@ -5436,6 +5468,13 @@ throw new InvalidArgumentException('Level "'.$level.'" is not defined, use one o
 }
 return static::$levels[$level];
 }
+public static function toMonologLevel($level)
+{
+if (is_string($level) && defined(__CLASS__.'::'.strtoupper($level))) {
+return constant(__CLASS__.'::'.strtoupper($level));
+}
+return $level;
+}
 public function isHandling($level)
 {
 $record = array('level'=> $level,
@@ -5608,12 +5647,13 @@ public function isHandlerActivated(array $record);
 }
 namespace Monolog\Handler\FingersCrossed
 {
+use Monolog\Logger;
 class ErrorLevelActivationStrategy implements ActivationStrategyInterface
 {
 private $actionLevel;
 public function __construct($actionLevel)
 {
-$this->actionLevel = $actionLevel;
+$this->actionLevel = Logger::toMonologLevel($actionLevel);
 }
 public function isHandlerActivated(array $record)
 {
@@ -6586,6 +6626,148 @@ throw new \RuntimeException(sprintf('Unknown key "%s" for annotation "@%s".', $k
 }
 $this->$name($v);
 }
+}
+}
+}
+namespace JMS\DiExtraBundle\HttpKernel
+{
+use Metadata\ClassHierarchyMetadata;
+use JMS\DiExtraBundle\Metadata\ClassMetadata;
+use CG\Core\DefaultNamingStrategy;
+use CG\Proxy\Enhancer;
+use JMS\AopBundle\DependencyInjection\Compiler\PointcutMatchingPass;
+use JMS\DiExtraBundle\Generator\DefinitionInjectorGenerator;
+use JMS\DiExtraBundle\Generator\LookupMethodClassGenerator;
+use JMS\DiExtraBundle\DependencyInjection\Dumper\PhpDumper;
+use Metadata\MetadataFactory;
+use Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\Compiler\ResolveDefinitionTemplatesPass;
+use Symfony\Component\DependencyInjection\Parameter;
+use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\Config\Resource\FileResource;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\Config\ConfigCache;
+use Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver as BaseControllerResolver;
+class ControllerResolver extends BaseControllerResolver
+{
+protected function createController($controller)
+{
+if (false === $pos = strpos($controller,'::')) {
+$count = substr_count($controller,':');
+if (2 == $count) {
+$controller = $this->parser->parse($controller);
+$pos = strpos($controller,'::');
+} elseif (1 == $count) {
+list($service, $method) = explode(':', $controller);
+return array($this->container->get($service), $method);
+} else {
+throw new \LogicException(sprintf('Unable to parse the controller name "%s".', $controller));
+}
+}
+$class = substr($controller, 0, $pos);
+$method = substr($controller, $pos+2);
+if (!class_exists($class)) {
+throw new \InvalidArgumentException(sprintf('Class "%s" does not exist.', $class));
+}
+$injector = $this->createInjector($class);
+$controller = call_user_func($injector, $this->container);
+if ($controller instanceof ContainerAwareInterface) {
+$controller->setContainer($this->container);
+}
+return array($controller, $method);
+}
+public function createInjector($class)
+{
+$filename = $this->container->getParameter('jms_di_extra.cache_dir').'/controller_injectors/'.str_replace('\\','', $class).'.php';
+$cache = new ConfigCache($filename, $this->container->getParameter('kernel.debug'));
+if (!$cache->isFresh()) {
+$metadata = $this->container->get('jms_di_extra.metadata.metadata_factory')->getMetadataForClass($class);
+if (null === $metadata) {
+$metadata = new ClassHierarchyMetadata();
+$metadata->addClassMetadata(new ClassMetadata($class));
+}
+if (null !== $metadata->getOutsideClassMetadata()->id
+&& 0 !== strpos($metadata->getOutsideClassMetadata()->id,'_jms_di_extra.unnamed.service')) {
+return;
+}
+$this->prepareContainer($cache, $filename, $metadata, $class);
+}
+if ( ! class_exists($class.'__JMSInjector', false)) {
+require $filename;
+}
+return array($class.'__JMSInjector','inject');
+}
+private function prepareContainer($cache, $containerFilename, $metadata, $className)
+{
+$container = new ContainerBuilder();
+$container->setParameter('jms_aop.cache_dir', $this->container->getParameter('jms_di_extra.cache_dir'));
+$def = $container
+->register('jms_aop.interceptor_loader','JMS\AopBundle\Aop\InterceptorLoader')
+->addArgument(new Reference('service_container'))
+->setPublic(false)
+;
+$ref = $metadata->getOutsideClassMetadata()->reflection;
+while ($ref && false !== $filename = $ref->getFilename()) {
+$container->addResource(new FileResource($filename));
+$ref = $ref->getParentClass();
+}
+$definitions = $this->container->get('jms_di_extra.metadata.converter')->convert($metadata);
+$serviceIds = $parameters = array();
+$controllerDef = array_pop($definitions);
+$container->setDefinition('controller', $controllerDef);
+foreach ($definitions as $id => $def) {
+$container->setDefinition($id, $def);
+}
+$this->generateLookupMethods($controllerDef, $metadata);
+$config = $container->getCompilerPassConfig();
+$config->setOptimizationPasses(array());
+$config->setRemovingPasses(array());
+$config->addPass(new ResolveDefinitionTemplatesPass());
+$config->addPass(new PointcutMatchingPass($this->container->get('jms_aop.pointcut_container')->getPointcuts()));
+$config->addPass(new InlineServiceDefinitionsPass());
+$container->compile();
+if (!file_exists($dir = dirname($containerFilename))) {
+if (false === @mkdir($dir, 0777, true)) {
+throw new \RuntimeException(sprintf('Could not create directory "%s".', $dir));
+}
+}
+static $generator;
+if (null === $generator) {
+$generator = new DefinitionInjectorGenerator();
+}
+$cache->write($generator->generate($container->getDefinition('controller'), $className), $container->getResources());
+}
+private function generateLookupMethods($def, $metadata)
+{
+$found = false;
+foreach ($metadata->classMetadata as $cMetadata) {
+if (!empty($cMetadata->lookupMethods)) {
+$found = true;
+break;
+}
+}
+if (!$found) {
+return;
+}
+$generator = new LookupMethodClassGenerator($metadata);
+$outerClass = $metadata->getOutsideClassMetadata()->reflection;
+if ($file = $def->getFile()) {
+$generator->setRequiredFile($file);
+}
+$enhancer = new Enhancer(
+$outerClass,
+array(),
+array(
+$generator,
+)
+);
+$filename = $this->container->getParameter('jms_di_extra.cache_dir').'/lookup_method_classes/'.str_replace('\\','-', $outerClass->name).'.php';
+$enhancer->writeClass($filename);
+$def->setFile($filename);
+$def->setClass($enhancer->getClassName($outerClass));
+$def->addMethodCall('__jmsDiExtra_setContainer', array(new Reference('service_container')));
 }
 }
 }

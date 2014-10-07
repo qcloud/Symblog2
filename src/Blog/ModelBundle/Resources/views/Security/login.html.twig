@@ -1,6 +1,7 @@
 {% extends "ModelBundle::layout.html.twig" %}
 
 {% trans_default_domain 'FOSUserBundle' %}
+{% block title %}Login{% endblock %}
 
 {% block fos_user_content %}
 
@@ -40,6 +41,8 @@
 
                             <input class="btn btn-lg btn-success btn-block" type="submit" id="_submit" name="_submit"
                                    value="{{ 'security.login.submit'|trans }}"/>
+                            <a href="{{ path("fos_user_registration_register") }}" class="btn btn-white btn-block">Create
+                                an account</a>
                         </form>
                     </div>
                 </div>
