@@ -5,9 +5,7 @@ namespace Blog\CoreBundle\Controller;
 use Blog\ModelBundle\Form\CommentType;
 use Blog\ModelBundle\Entity\Comment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration as DI;
 use Symfony\Component\HttpFoundation\Request;
 
 
@@ -17,8 +15,8 @@ class PostController extends Controller
      * Show the posts index
      * @return array
      *
-     * @Route("/")
-     * @Template()
+     * @DI\Route("/")
+     * @DI\Template()
      */
     public function indexAction()
     {
@@ -37,9 +35,9 @@ class PostController extends Controller
      * @throws NotFoundHttpException
      * @return array
      *
-     * @Route("/{slug}")
+     * @DI\Route("/{slug}")
      *
-     * @Template()
+     * @DI\Template()
      */
     public function showAction($slug)
     {
@@ -61,9 +59,9 @@ class PostController extends Controller
      *
      * @throws NotFoundHttpException
      *
-     * @Route("/{slug}/create-comment")
-     * @Method("POST")
-     * @Template("CoreBundle:Post:show.html.twig")
+     * @DI\Route("/{slug}/create-comment")
+     * @DI\Method("POST")
+     * @DI\Template("CoreBundle:Post:show.html.twig")
      * @return array
      */
     public function createCommentAction(Request $request, $slug)

@@ -11,7 +11,7 @@ admin:
 core:
     resource: "@CoreBundle/Controller/"
     type:     annotation
-    prefix:   /all
+    prefix:   /
 
 user:
     resource: "@ModelBundle/Resources/config/routing.yml"

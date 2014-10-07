@@ -80,7 +80,7 @@ class AdminController extends Controller
     /**
      * Displays a form to create a new Author entity.
      *
-     * @DI\Route("/new")
+     * @DI\Route("/author/new")
      * @DI\Method("GET")
      * @DI\Template()
      */
@@ -98,7 +98,7 @@ class AdminController extends Controller
     /**
      * Finds and displays a Author entity.
      *
-     * @DI\Route("/{id}")
+     * @DI\Route("/author/{id}")
      * @DI\Method("GET")
      * @DI\Template()
      */
@@ -123,7 +123,7 @@ class AdminController extends Controller
     /**
      * Displays a form to edit an existing Author entity.
      *
-     * @DI\Route("/{id}/edit")
+     * @DI\Route("author/{id}/edit")
      * @DI\Method("GET")
      * @DI\Template()
      */
@@ -169,7 +169,7 @@ class AdminController extends Controller
     /**
      * Edits an existing Author entity.
      *
-     * @DI\Route("/{id}")
+     * @DI\Route("author/{id}")
      * @DI\Method("PUT")
      * @DI\Template("AdminBundle:Author:edit.html.twig")
      */
@@ -203,7 +203,7 @@ class AdminController extends Controller
     /**
      * Deletes a Author entity.
      *
-     * @DI\Route("/{id}")
+     * @DI\Route("author/{id}")
      * @DI\Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
