@@ -63,8 +63,8 @@ class __TwigTemplate_47f06a3115408e6efaa8ba950c3ef09435da40c0300cef65670b9d33a3c
         echo "\"/>
 
                             <div class=\"form-group\">
-                                <label class=\"control-label\" for=\"username\">Email</label>
-                                <input type=\"email\" id=\"username\" name=\"_username\" value=\"";
+                                <label class=\"control-label\" for=\"username\">Email Or Username</label>
+                                <input type=\"text\" id=\"username\" name=\"_username\" value=\"";
         // line 24
         echo twig_escape_filter($this->env, (isset($context["last_username"]) ? $context["last_username"] : $this->getContext($context, "last_username")), "html", null, true);
         echo "\"
