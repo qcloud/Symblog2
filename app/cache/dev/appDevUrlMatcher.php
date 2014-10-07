@@ -211,37 +211,40 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
             }
 
-            // blog_core_author_show
-            if (0 === strpos($pathinfo, '/author') && preg_match('#^/author/(?P<slug>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'blog_core_author_show')), array (  '_controller' => 'Blog\\CoreBundle\\Controller\\AuthorController::showAction',));
+            if (0 === strpos($pathinfo, '/all')) {
+                // blog_core_author_show
+                if (0 === strpos($pathinfo, '/all/author') && preg_match('#^/all/author/(?P<slug>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'blog_core_author_show')), array (  '_controller' => 'Blog\\CoreBundle\\Controller\\AuthorController::showAction',));
+                }
+
+                // blog_core_post_index
+                if (rtrim($pathinfo, '/') === '/all') {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'blog_core_post_index');
+                    }
+
+                    return array (  '_controller' => 'Blog\\CoreBundle\\Controller\\PostController::indexAction',  '_route' => 'blog_core_post_index',);
+                }
+
+                // blog_core_post_show
+                if (preg_match('#^/all/(?P<slug>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'blog_core_post_show')), array (  '_controller' => 'Blog\\CoreBundle\\Controller\\PostController::showAction',));
+                }
+
+                // blog_core_post_createcomment
+                if (preg_match('#^/all/(?P<slug>[^/]++)/create\\-comment$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_blog_core_post_createcomment;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'blog_core_post_createcomment')), array (  '_controller' => 'Blog\\CoreBundle\\Controller\\PostController::createCommentAction',));
+                }
+                not_blog_core_post_createcomment:
+
             }
 
         }
-
-        // blog_core_post_index
-        if (rtrim($pathinfo, '/') === '') {
-            if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', 'blog_core_post_index');
-            }
-
-            return array (  '_controller' => 'Blog\\CoreBundle\\Controller\\PostController::indexAction',  '_route' => 'blog_core_post_index',);
-        }
-
-        // blog_core_post_show
-        if (preg_match('#^/(?P<slug>[^/]++)$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'blog_core_post_show')), array (  '_controller' => 'Blog\\CoreBundle\\Controller\\PostController::showAction',));
-        }
-
-        // blog_core_post_createcomment
-        if (preg_match('#^/(?P<slug>[^/]++)/create\\-comment$#s', $pathinfo, $matches)) {
-            if ($this->context->getMethod() != 'POST') {
-                $allow[] = 'POST';
-                goto not_blog_core_post_createcomment;
-            }
-
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'blog_core_post_createcomment')), array (  '_controller' => 'Blog\\CoreBundle\\Controller\\PostController::createCommentAction',));
-        }
-        not_blog_core_post_createcomment:
 
         if (0 === strpos($pathinfo, '/log')) {
             if (0 === strpos($pathinfo, '/login')) {

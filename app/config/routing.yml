@@ -11,8 +11,12 @@ admin:
 core:
     resource: "@CoreBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /all
 
 user:
     resource: "@ModelBundle/Resources/config/routing.yml"
     prefix:   /
+
+
+#_index:
+#    pattern: /

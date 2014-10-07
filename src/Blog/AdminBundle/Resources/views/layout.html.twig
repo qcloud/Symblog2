@@ -5,23 +5,23 @@
     <title>{% block title %}{% endblock %}</title>
     {% block stylesheets %}
         <!-- Bootstrap Core CSS -->
-        "{{ asset('bundles/core/css/bootstrap.css') }}"
-        <link href="{{ asset('bundles/core/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/admin/css/bootstrap.min.css') }}" rel="stylesheet">
 
         <!-- MetisMenu CSS -->
-        <link href="{{ asset('bundles/core/css/plugins/metisMenu/metisMenu.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/admin/css/plugins/metisMenu/metisMenu.min.css') }}" rel="stylesheet">
 
         <!-- Timeline CSS -->
-        <link href="{{ asset('bundles/core/css/plugins/timeline.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/admin/css/plugins/timeline.css') }}" rel="stylesheet">
 
         <!-- Custom CSS -->
-        <link href="{{ asset('bundles/core/css/sb-admin-2.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/admin/css/sb-admin-2.css') }}" rel="stylesheet">
 
         <!-- Morris Charts CSS -->
-        <link href="{{ asset('bundles/core/css/plugins/morris.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/admin/css/plugins/morris.css') }}" rel="stylesheet">
 
         <!-- Custom Fonts -->
-        <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="{{ asset('bundles/admin/font-awesome-4.1.0/css/font-awesome.min.css') }}" rel="stylesheet"
+              type="text/css">
     {% endblock %}
 </head>
 <body>
@@ -250,7 +250,7 @@
         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
         </li>
         <li class="divider"></li>
-        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+        <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
         </li>
     </ul>
     <!-- /.dropdown-user -->
@@ -267,7 +267,7 @@
                     <input type="text" class="form-control" placeholder="Search...">
                                 <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
+                                    <i class="fa fa-search">Search</i>
                                 </button>
                             </span>
                 </div>
