@@ -15,6 +15,7 @@ Symblog2 is influenced by the famous Symblog blogging application powered by Sym
 * Go back to the terminal again and type `app/console doctrine:database:create`
 * Then run `app/console doctrine:migrations:migrate -n` to generate all the necessary schemas.
 * Then run `app/console doctrine:fixtures:load` and press y then enter when it asks for purge the database. It will generate some dummy data to play with.
+* Then run `app/console asset:install web` in windows machine or `app/console asset:install --symlink` in linux machine to install all the necessary stylesheets and javascript files.
 * You are good to go. 
 * From the terminal type `app/console server:run` and press enter. It will create a development server on port 8000
 * On your browser type `http://localhost:8000` to run the Symblog2 application.
