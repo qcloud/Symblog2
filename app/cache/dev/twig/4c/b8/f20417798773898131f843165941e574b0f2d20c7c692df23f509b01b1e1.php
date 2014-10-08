@@ -17,15 +17,12 @@ class __TwigTemplate_4cb8f20417798773898131f843165941e574b0f2d20c7c692df23f509b0
     protected function doDisplay(array $context, array $blocks = array())
     {
         // line 2
-        echo "
-";
-        // line 3
         $this->displayBlock('fos_user_content', $context, $blocks);
     }
 
     public function block_fos_user_content($context, array $blocks = array())
     {
-        // line 4
+        // line 3
         echo "    <div class=\"container\" style=\"margin-top: 40px;\">
         <div class=\"row\">
             <div class=\"col-md-4 col-md-offset-4\">
@@ -38,7 +35,7 @@ class __TwigTemplate_4cb8f20417798773898131f843165941e574b0f2d20c7c692df23f509b0
                             Sign up
                         </header>
                         <form action=\"";
-        // line 15
+        // line 14
         echo $this->env->getExtension('routing')->getPath("fos_user_registration_register");
         echo "\" ";
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'enctype');
@@ -48,39 +45,39 @@ class __TwigTemplate_4cb8f20417798773898131f843165941e574b0f2d20c7c692df23f509b0
                             <div class=\"form-group\">
                                 <label class=\"control-label\">Display name</label>
                                 ";
-        // line 20
+        // line 19
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "username"), 'widget', array("attr" => array("class" => "form-control", "placeholder" => "eg. Your name")));
-        // line 21
+        // line 20
         echo "
                             </div>
                             <div class=\"form-group\">
                                 <label class=\"control-label\">Your email address</label>
                                 ";
-        // line 25
+        // line 24
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "email"), 'widget', array("attr" => array("class" => "form-control", "placeholder" => "test@example.com")));
-        // line 26
+        // line 25
         echo "
                             </div>
                             ";
+        // line 28
+        echo "                            ";
         // line 29
         echo "                            ";
         // line 30
         echo "                            ";
         // line 31
-        echo "                            ";
-        // line 32
         echo "                            <label class=\"control-label\">Type a password</label>
                             ";
-        // line 33
+        // line 32
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "plainPassword"), "first"), 'widget', array("attr" => array("class" => "form-control", "placeholder" => "Password", "id" => "inputPassword")));
-        // line 34
+        // line 33
         echo "
                             <br/>
                             <label class=\"control-label\">Confirm password</label>
                             ";
-        // line 37
+        // line 36
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "plainPassword"), "second"), 'widget', array("attr" => array("class" => "form-control", "placeholder" => "Confirm Password", "id" => "inputPassword")));
-        // line 38
+        // line 37
         echo "
 
 
@@ -90,11 +87,11 @@ class __TwigTemplate_4cb8f20417798773898131f843165941e574b0f2d20c7c692df23f509b0
                                 </label>
                             </div>
                             ";
-        // line 46
+        // line 45
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'widget');
         echo "
                             <button type=\"submit\" class=\"btn btn-info\">";
-        // line 47
+        // line 46
         echo twig_escape_filter($this->env, $this->env->getExtension('translator')->trans("registration.submit", array(), "FOSUserBundle"), "html", null, true);
         echo "</button>
                             <div class=\"line line-dashed\"></div>
@@ -118,6 +115,6 @@ class __TwigTemplate_4cb8f20417798773898131f843165941e574b0f2d20c7c692df23f509b0
 
     public function getDebugInfo()
     {
-        return array (  98 => 47,  94 => 46,  84 => 38,  82 => 37,  77 => 34,  75 => 33,  72 => 32,  70 => 31,  68 => 30,  66 => 29,  62 => 26,  60 => 25,  54 => 21,  52 => 20,  42 => 15,  29 => 4,  23 => 3,  20 => 2,);
+        return array (  95 => 46,  91 => 45,  81 => 37,  79 => 36,  74 => 33,  72 => 32,  69 => 31,  67 => 30,  65 => 29,  63 => 28,  59 => 25,  57 => 24,  51 => 20,  49 => 19,  39 => 14,  26 => 3,  20 => 2,  38 => 4,  35 => 3,  29 => 2,);
     }
 }

@@ -11,7 +11,7 @@ class __TwigTemplate_9ebc2a58853c867ad3dbffdc7333db1ecdd8e1ffd7858e1dfb2a736d363
 
         $this->blocks = array(
             'title' => array($this, 'block_title'),
-            'body' => array($this, 'block_body'),
+            'container' => array($this, 'block_container'),
         );
     }
 
@@ -32,56 +32,50 @@ class __TwigTemplate_9ebc2a58853c867ad3dbffdc7333db1ecdd8e1ffd7858e1dfb2a736d363
     }
 
     // line 3
-    public function block_body($context, array $blocks = array())
+    public function block_container($context, array $blocks = array())
     {
         // line 4
-        echo "<h1>Author list</h1>
+        echo "<h1>Blogs</h1>
 
-    <table class=\"records_list\">
+    <table class=\"table table-striped table-bordered table-condensed\">
         <thead>
         <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Slug</th>
-            <th>Actions</th>
+            <th class=\"text-center\">Title</th>
+            <th class=\"text-center\">Content</th>
+            <th class=\"text-center\">Actions</th>
         </tr>
         </thead>
         <tbody>
         ";
-        // line 16
+        // line 15
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["entities"]) ? $context["entities"] : $this->getContext($context, "entities")));
         foreach ($context['_seq'] as $context["_key"] => $context["entity"]) {
-            // line 17
+            // line 16
             echo "            <tr>
-                <td><a href=\"";
-            // line 18
-            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("blog_admin_admin_show", array("id" => $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "id"))), "html", null, true);
-            echo "\">";
-            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "id"), "html", null, true);
-            echo "</a></td>
-                <td>";
-            // line 19
-            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "name"), "html", null, true);
+                <td style=\"width: 30%;\">";
+            // line 17
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "title"), "html", null, true);
             echo "</td>
                 <td>";
-            // line 20
-            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "slug"), "html", null, true);
+            // line 18
+            echo twig_escape_filter($this->env, twig_truncate_filter($this->env, $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "body"), 70), "html", null, true);
             echo "</td>
                 <td>
-                    <ul>
+                    <ul class=\"list-inline text-center\">
                         <li>
                             <a href=\"";
-            // line 24
+            // line 22
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("blog_admin_admin_show", array("id" => $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "id"))), "html", null, true);
             echo "\">show</a>
                         </li>
                         <li>
                             <a href=\"";
-            // line 27
+            // line 25
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("blog_admin_admin_edit", array("id" => $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "id"))), "html", null, true);
             echo "\">edit</a>
                         </li>
+                        <li><a href=\"#\">Delete</a></li>
                     </ul>
                 </td>
             </tr>
@@ -90,20 +84,9 @@ class __TwigTemplate_9ebc2a58853c867ad3dbffdc7333db1ecdd8e1ffd7858e1dfb2a736d363
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['entity'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 33
+        // line 32
         echo "        </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href=\"";
-        // line 38
-        echo $this->env->getExtension('routing')->getPath("blog_admin_admin_new");
-        echo "\">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
 ";
     }
 
@@ -119,6 +102,6 @@ class __TwigTemplate_9ebc2a58853c867ad3dbffdc7333db1ecdd8e1ffd7858e1dfb2a736d363
 
     public function getDebugInfo()
     {
-        return array (  101 => 38,  94 => 33,  82 => 27,  76 => 24,  69 => 20,  65 => 19,  59 => 18,  56 => 17,  52 => 16,  38 => 4,  35 => 3,  29 => 2,);
+        return array (  88 => 32,  75 => 25,  69 => 22,  62 => 18,  58 => 17,  55 => 16,  51 => 15,  38 => 4,  35 => 3,  29 => 2,);
     }
 }

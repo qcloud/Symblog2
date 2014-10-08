@@ -1,10 +1,10 @@
 /web/bundles/
 /app/config/parameters.yml
-/var/bootstrap.php.cache
-/var/cache/*
-/var/logs/*
-!var/cache/.gitkeep
-!var/logs/.gitkeep
+/app/bootstrap.php.cache
+/app/cache/*
+/app/logs/*
+!app/cache/.gitkeep
+!app/logs/.gitkeep
 /build/
 /vendor/
 /bin/*

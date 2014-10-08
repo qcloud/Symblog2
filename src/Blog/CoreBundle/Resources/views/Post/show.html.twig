@@ -1,6 +1,12 @@
 {% extends "CoreBundle::layout.html.twig" %}
 
 {% block header %}
+    {# display message after a comment has benn made #}
+    {% for type, message in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <p class="success">{{ message }}</p>
+        {% endfor %}
+    {% endfor %}
     <header class="intro-header post-header">
         <div class="container">
             <div class="row">
@@ -8,7 +14,7 @@
                     <div class="post-heading">
                         <h1>{{ post.title }}</h1>
                         <span class="meta">Posted by <a
-                                    href="{{ path('blog_core_author_show',{slug: post.author.slug}) }}"><strong>{{ post.author.name }}</strong>
+                                    href="{{ path('blog_core_author_show',{slug: post.author.slug}) }}"><strong>{{ post.author.username }}</strong>
                             </a> on <strong>{{ post.createdAt | date('m-d-Y') }}</strong></span>
                     </div>
                 </div>

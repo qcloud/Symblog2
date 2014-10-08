@@ -146,18 +146,18 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 }
                 not_blog_admin_admin_create:
 
-                if (0 === strpos($pathinfo, '/admin/author')) {
-                    // blog_admin_admin_new
-                    if ($pathinfo === '/admin/author/new') {
-                        if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
-                            $allow = array_merge($allow, array('GET', 'HEAD'));
-                            goto not_blog_admin_admin_new;
-                        }
-
-                        return array (  '_controller' => 'Blog\\AdminBundle\\Controller\\AdminController::newAction',  '_route' => 'blog_admin_admin_new',);
+                // blog_admin_admin_new
+                if ($pathinfo === '/admin/post/new') {
+                    if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                        $allow = array_merge($allow, array('GET', 'HEAD'));
+                        goto not_blog_admin_admin_new;
                     }
-                    not_blog_admin_admin_new:
 
+                    return array (  '_controller' => 'Blog\\AdminBundle\\Controller\\AdminController::newAction',  '_route' => 'blog_admin_admin_new',);
+                }
+                not_blog_admin_admin_new:
+
+                if (0 === strpos($pathinfo, '/admin/author')) {
                     // blog_admin_admin_show
                     if (preg_match('#^/admin/author/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
                         if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {

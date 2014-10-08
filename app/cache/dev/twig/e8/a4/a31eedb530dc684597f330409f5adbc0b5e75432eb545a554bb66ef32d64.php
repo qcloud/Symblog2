@@ -38,9 +38,9 @@ class __TwigTemplate_e8a4a31eedb530dc684597f330409f5adbc0b5e75432eb545a554bb66ef
 ";
         // line 21
         $this->displayBlock('navigation', $context, $blocks);
-        // line 55
+        // line 61
         $this->displayBlock('header', $context, $blocks);
-        // line 63
+        // line 69
         echo "
 <!-- Main Content -->
 <div class=\"container\">
@@ -48,16 +48,16 @@ class __TwigTemplate_e8a4a31eedb530dc684597f330409f5adbc0b5e75432eb545a554bb66ef
         <div class=\"col-lg-8\">
 
             ";
-        // line 69
+        // line 75
         $this->displayBlock('mainContainer', $context, $blocks);
-        // line 77
+        // line 83
         echo "
         </div>
         <div class=\"col-lg-2 col-lg-offset-2\">
             ";
-        // line 80
+        // line 86
         $this->displayBlock('latestPosts', $context, $blocks);
-        // line 82
+        // line 88
         echo "        </div>
     </div>
 </div>
@@ -66,11 +66,11 @@ class __TwigTemplate_e8a4a31eedb530dc684597f330409f5adbc0b5e75432eb545a554bb66ef
 
 
 ";
-        // line 89
+        // line 95
         $this->displayBlock('footer', $context, $blocks);
-        // line 127
+        // line 133
         $this->displayBlock('javascripts_footer', $context, $blocks);
-        // line 134
+        // line 140
         echo "</body>
 </html>
 
@@ -143,6 +143,18 @@ class __TwigTemplate_e8a4a31eedb530dc684597f330409f5adbc0b5e75432eb545a554bb66ef
                     <li>
                         <a href=\"#\">Contact</a>
                     </li>
+                    <li>
+                        <a href=\"";
+        // line 49
+        echo $this->env->getExtension('routing')->getPath("fos_user_registration_register");
+        echo "\">Create account</a>
+                    </li>
+                    <li>
+                        <a href=\"";
+        // line 52
+        echo $this->env->getExtension('routing')->getPath("fos_user_security_login");
+        echo "\">Login</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -152,22 +164,22 @@ class __TwigTemplate_e8a4a31eedb530dc684597f330409f5adbc0b5e75432eb545a554bb66ef
 ";
     }
 
-    // line 55
+    // line 61
     public function block_header($context, array $blocks = array())
     {
-        // line 56
+        // line 62
         echo "    ";
-        // line 57
+        // line 63
         echo "    ";
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "session"), "flashbag"), "all", array(), "method"));
         foreach ($context['_seq'] as $context["type"] => $context["message"]) {
-            // line 58
+            // line 64
             echo "        ";
             $context['_parent'] = (array) $context;
             $context['_seq'] = twig_ensure_traversable((isset($context["messages"]) ? $context["messages"] : $this->getContext($context, "messages")));
             foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
-                // line 59
+                // line 65
                 echo "            <p class=\"success\">";
                 echo twig_escape_filter($this->env, (isset($context["message"]) ? $context["message"] : $this->getContext($context, "message")), "html", null, true);
                 echo "</p>
@@ -176,7 +188,7 @@ class __TwigTemplate_e8a4a31eedb530dc684597f330409f5adbc0b5e75432eb545a554bb66ef
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 61
+            // line 67
             echo "    ";
         }
         $_parent = $context['_parent'];
@@ -184,10 +196,10 @@ class __TwigTemplate_e8a4a31eedb530dc684597f330409f5adbc0b5e75432eb545a554bb66ef
         $context = array_intersect_key($context, $_parent) + $_parent;
     }
 
-    // line 69
+    // line 75
     public function block_mainContainer($context, array $blocks = array())
     {
-        // line 70
+        // line 76
         echo "                <!-- Pager -->
                 <ul class=\"pager\">
                     <li class=\"next\">
@@ -197,17 +209,17 @@ class __TwigTemplate_e8a4a31eedb530dc684597f330409f5adbc0b5e75432eb545a554bb66ef
             ";
     }
 
-    // line 80
+    // line 86
     public function block_latestPosts($context, array $blocks = array())
     {
-        // line 81
+        // line 87
         echo "            ";
     }
 
-    // line 89
+    // line 95
     public function block_footer($context, array $blocks = array())
     {
-        // line 90
+        // line 96
         echo "    <!-- Footer -->
     <footer>
         <div class=\"container\">
@@ -239,7 +251,7 @@ class __TwigTemplate_e8a4a31eedb530dc684597f330409f5adbc0b5e75432eb545a554bb66ef
                             </a>
                         </li>
                     </ul>
-                    <p class=\"copyright text-muted\">Copyright &copy; Your Website 2014</p>
+                    <p class=\"copyright text-muted\">Copyright &copy; Symblog2 2014</p>
                 </div>
             </div>
         </div>
@@ -247,22 +259,22 @@ class __TwigTemplate_e8a4a31eedb530dc684597f330409f5adbc0b5e75432eb545a554bb66ef
 ";
     }
 
-    // line 127
+    // line 133
     public function block_javascripts_footer($context, array $blocks = array())
     {
-        // line 128
+        // line 134
         echo "    <!-- / footer -->
     <script src=\"";
-        // line 129
+        // line 135
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/core/js/jquery.min.js"), "html", null, true);
         echo "\"></script>
     <!-- Bootstrap -->
     <script src=\"";
-        // line 131
+        // line 137
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/core/js/bootstrap.js"), "html", null, true);
         echo "\"></script>
     <script src=\"";
-        // line 132
+        // line 138
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/core/js/clean-blog.min.js"), "html", null, true);
         echo "\"></script>
 ";
@@ -275,6 +287,6 @@ class __TwigTemplate_e8a4a31eedb530dc684597f330409f5adbc0b5e75432eb545a554bb66ef
 
     public function getDebugInfo()
     {
-        return array (  266 => 132,  262 => 131,  257 => 129,  254 => 128,  251 => 127,  211 => 90,  208 => 89,  204 => 81,  201 => 80,  191 => 70,  188 => 69,  180 => 61,  171 => 59,  166 => 58,  161 => 57,  159 => 56,  156 => 55,  137 => 40,  117 => 22,  114 => 21,  104 => 12,  100 => 11,  96 => 10,  92 => 9,  88 => 8,  85 => 7,  74 => 134,  70 => 89,  61 => 82,  59 => 80,  54 => 77,  52 => 69,  44 => 63,  42 => 55,  40 => 21,  35 => 18,  26 => 1,  93 => 30,  82 => 6,  78 => 27,  72 => 127,  69 => 24,  58 => 21,  53 => 20,  50 => 19,  33 => 6,  30 => 3,);
+        return array (  278 => 138,  274 => 137,  269 => 135,  266 => 134,  263 => 133,  223 => 96,  220 => 95,  216 => 87,  213 => 86,  203 => 76,  200 => 75,  192 => 67,  183 => 65,  178 => 64,  173 => 63,  171 => 62,  168 => 61,  155 => 52,  149 => 49,  137 => 40,  117 => 22,  114 => 21,  104 => 12,  100 => 11,  96 => 10,  92 => 9,  88 => 8,  85 => 7,  82 => 6,  74 => 140,  72 => 133,  70 => 95,  61 => 88,  59 => 86,  54 => 83,  52 => 75,  44 => 69,  42 => 61,  40 => 21,  35 => 18,  33 => 6,  26 => 1,);
     }
 }

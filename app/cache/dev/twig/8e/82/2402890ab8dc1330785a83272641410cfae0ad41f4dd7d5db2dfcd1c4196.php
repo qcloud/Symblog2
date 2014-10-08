@@ -43,7 +43,7 @@ class __TwigTemplate_8e822402890ab8dc1330785a83272641410cfae0ad41f4dd7d5db2dfcd1
         // line 11
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("blog_core_author_show", array("slug" => $this->getAttribute($this->getAttribute((isset($context["post"]) ? $context["post"] : $this->getContext($context, "post")), "author"), "slug"))), "html", null, true);
         echo "\"><strong>";
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["post"]) ? $context["post"] : $this->getContext($context, "post")), "author"), "name"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["post"]) ? $context["post"] : $this->getContext($context, "post")), "author"), "username"), "html", null, true);
         echo "</strong>
                             </a> on <strong>";
         // line 12

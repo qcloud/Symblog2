@@ -2,6 +2,8 @@
 
 namespace Blog\AdminBundle\Controller;
 
+use Blog\ModelBundle\Entity\Post;
+use Blog\ModelBundle\Form\PostType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Blog\ModelBundle\Entity\Author;
@@ -24,7 +26,7 @@ class AdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('ModelBundle:Author')->findAll();
+        $entities = $em->getRepository('ModelBundle:Post')->findBy(array('author' => $this->getUser()));
 
         return array(
             'entities' => $entities,
@@ -40,7 +42,8 @@ class AdminController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new Author();
+        $entity = new Post();
+        $entity->setAuthor($this->container->get('security.context')->getToken()->getUser());
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -49,7 +52,7 @@ class AdminController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('blog_admin_author_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('blog_admin_admin_index', array('id' => $entity->getId())));
         }
 
         return array(
@@ -61,14 +64,14 @@ class AdminController extends Controller
     /**
      * Creates a form to create a Author entity.
      *
-     * @param Author $entity The entity
+     * @param Post $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Author $entity)
+    private function createCreateForm(Post $entity)
     {
-        $form = $this->createForm(new AuthorType(), $entity, array(
-            'action' => $this->generateUrl('blog_admin_author_create'),
+        $form = $this->createForm(new PostType(), $entity, array(
+            'action' => $this->generateUrl('blog_admin_admin_create'),
             'method' => 'POST',
         ));
 
@@ -78,20 +81,20 @@ class AdminController extends Controller
     }
 
     /**
-     * Displays a form to create a new Author entity.
+     * Displays a form to create a new Post entity.
      *
-     * @DI\Route("/author/new")
+     * @DI\Route("/post/new")
      * @DI\Method("GET")
      * @DI\Template()
      */
     public function newAction()
     {
-        $entity = new Author();
+        $entity = new Post();
         $form = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,
-            'form' => $form->createView(),
+            'postForm' => $form->createView(),
         );
     }
 

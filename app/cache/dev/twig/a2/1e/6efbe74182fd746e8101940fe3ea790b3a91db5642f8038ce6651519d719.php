@@ -42,7 +42,7 @@ class __TwigTemplate_a21e6efbe74182fd746e8101940fe3ea790b3a91db5642f8038ce665151
         // line 12
         echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("blog_core_author_show", array("slug" => $this->getAttribute($this->getAttribute((isset($context["post"]) ? $context["post"] : $this->getContext($context, "post")), "author"), "slug"))), "html", null, true);
         echo "\">";
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["post"]) ? $context["post"] : $this->getContext($context, "post")), "author"), "name"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["post"]) ? $context["post"] : $this->getContext($context, "post")), "author"), "username"), "html", null, true);
         echo "</a>
         on ";
         // line 13
@@ -75,6 +75,6 @@ class __TwigTemplate_a21e6efbe74182fd746e8101940fe3ea790b3a91db5642f8038ce665151
 
     public function getDebugInfo()
     {
-        return array (  55 => 16,  49 => 13,  43 => 12,  34 => 8,  23 => 3,  19 => 1,  266 => 132,  262 => 131,  257 => 129,  254 => 128,  251 => 127,  211 => 90,  208 => 89,  204 => 81,  201 => 80,  191 => 70,  188 => 69,  180 => 61,  171 => 59,  166 => 58,  161 => 57,  159 => 56,  156 => 55,  137 => 40,  117 => 22,  114 => 21,  104 => 12,  100 => 11,  96 => 10,  92 => 9,  88 => 8,  85 => 7,  74 => 134,  70 => 89,  61 => 82,  59 => 80,  54 => 77,  52 => 69,  44 => 63,  42 => 55,  40 => 21,  35 => 18,  26 => 1,  93 => 30,  82 => 6,  78 => 27,  72 => 127,  69 => 24,  58 => 21,  53 => 20,  50 => 19,  33 => 6,  30 => 7,);
+        return array (  55 => 16,  49 => 13,  43 => 12,  34 => 8,  30 => 7,  23 => 3,  19 => 1,);
     }
 }

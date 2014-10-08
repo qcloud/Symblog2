@@ -53,8 +53,8 @@ class Post extends Timestampable
     /**
      * @var Author
      *
-     * @ORM\ManyToOne(targetEntity="Author", inversedBy="posts")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="posts")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      * @Assert\NotBlank
      */
     private $author;
@@ -162,11 +162,11 @@ class Post extends Timestampable
     /**
      * Set author
      *
-     * @param \Blog\ModelBundle\Entity\Author $author
+     * @param \Blog\ModelBundle\Entity\User $author
      *
-     * @return Author
+     * @return User
      */
-    public function setAuthor(Author $author)
+    public function setAuthor(User $author)
     {
         $this->author = $author;
 

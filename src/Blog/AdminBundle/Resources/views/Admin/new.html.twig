@@ -1,15 +1,39 @@
-{% extends '::base.html.twig' %}
+{% extends 'AdminBundle::layout.html.twig' %}
 
-{% block body -%}
-    <h1>Author creation</h1>
+{% block container -%}
+    <h1>Create a new Blog post</h1>
 
-    {{ form(form) }}
+    <div class="panel-body">
+        <form class="form-horizontal" action="{{ path('blog_admin_admin_create') }}"
+              method="post">
+            <div class="form-group">
+                <label class="col-lg-2 control-label" for="inputName">Title</label>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('author') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+                <div class="col-lg-8">
+                    {{ form_widget(postForm.title, {'attr': {'class': 'form-control form-control-trans','placeholder':'Title' }}
+                    ) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-2 control-label" for="inputName">Content</label>
+
+                <div class="col-lg-8">
+                    {{ form_widget(postForm.body, {'attr': {'class': 'form-control form-control-trans','placeholder':'Content','rows':10 }}
+                    ) }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label" for="inputName"></label>
+
+                <div class="col-lg-8">
+                    <input class="btn btn-default" type="submit" value="Post"/>
+                    {#{{ form_widget(commentForm.send, {'attr': {'class': 'btn btn-defult'}}#}
+                    {{ form_widget(postForm._token) }}
+                </div>
+            </div>
+        </form>
+    </div>
+
+
 {% endblock %}
