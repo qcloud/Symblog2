@@ -1,8 +1,8 @@
 /web/bundles/
 /app/config/parameters.yml
 /app/bootstrap.php.cache
-/app/cache/*
-/app/logs/*
+/app/cache/
+/app/logs/
 !app/cache/.gitkeep
 !app/logs/.gitkeep
 /build/

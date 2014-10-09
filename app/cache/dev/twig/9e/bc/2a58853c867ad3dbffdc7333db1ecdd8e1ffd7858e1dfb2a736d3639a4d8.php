@@ -75,7 +75,10 @@ class __TwigTemplate_9ebc2a58853c867ad3dbffdc7333db1ecdd8e1ffd7858e1dfb2a736d363
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("blog_admin_admin_edit", array("id" => $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "id"))), "html", null, true);
             echo "\">edit</a>
                         </li>
-                        <li><a href=\"#\">Delete</a></li>
+                        <li><a href=\"";
+            // line 27
+            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("blog_admin_admin_delete", array("id" => $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "id"))), "html", null, true);
+            echo "\">Delete</a></li>
                     </ul>
                 </td>
             </tr>
@@ -102,6 +105,6 @@ class __TwigTemplate_9ebc2a58853c867ad3dbffdc7333db1ecdd8e1ffd7858e1dfb2a736d363
 
     public function getDebugInfo()
     {
-        return array (  88 => 32,  75 => 25,  69 => 22,  62 => 18,  58 => 17,  55 => 16,  51 => 15,  38 => 4,  35 => 3,  29 => 2,);
+        return array (  91 => 32,  80 => 27,  75 => 25,  69 => 22,  62 => 18,  58 => 17,  55 => 16,  51 => 15,  38 => 4,  35 => 3,  29 => 2,);
     }
 }

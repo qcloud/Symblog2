@@ -32,11 +32,7 @@ class __TwigTemplate_45225d640461554d18af66df68df4139351e7dddcb6276f3b5e3ac9813a
         // line 6
         $this->displayBlock('stylesheets', $context, $blocks);
         // line 27
-        echo "    <script>
-        \$(document).ready(function () {
-            \$('#dataTables-example').dataTable();
-        });
-    </script>
+        echo "
 </head>
 <body>
 
@@ -44,7 +40,7 @@ class __TwigTemplate_45225d640461554d18af66df68df4139351e7dddcb6276f3b5e3ac9813a
 
     <!-- Navigation -->
     ";
-        // line 38
+        // line 34
         echo twig_include($this->env, $context, "AdminBundle:Admin:_navigation.html.twig");
         echo "
     <div id=\"page-wrapper\">
@@ -108,18 +104,18 @@ class __TwigTemplate_45225d640461554d18af66df68df4139351e7dddcb6276f3b5e3ac9813a
         <div class=\"row\">
             <div class=\"col-lg-12\">
                 ";
-        // line 99
+        // line 95
         $this->displayBlock('container', $context, $blocks);
-        // line 101
+        // line 97
         echo "
             </div>
         </div>
     </div>
 </div>
 ";
-        // line 106
+        // line 102
         $this->displayBlock('javascripts_footer', $context, $blocks);
-        // line 118
+        // line 114
         echo "</body>
 </html>";
     }
@@ -176,49 +172,49 @@ class __TwigTemplate_45225d640461554d18af66df68df4139351e7dddcb6276f3b5e3ac9813a
     ";
     }
 
-    // line 99
+    // line 95
     public function block_container($context, array $blocks = array())
     {
-        // line 100
+        // line 96
         echo "                ";
     }
 
-    // line 106
+    // line 102
     public function block_javascripts_footer($context, array $blocks = array())
     {
-        // line 107
+        // line 103
         echo "
 
     <script src=\"";
-        // line 109
+        // line 105
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/admin/js/bootstrap.min.js"), "html", null, true);
         echo "\"></script>
     <script src=\"";
-        // line 110
+        // line 106
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/admin/js/plugins/metisMenu/metisMenu.min.js"), "html", null, true);
         echo "\"></script>
     <script src=\"";
-        // line 111
+        // line 107
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/admin/js/plugins/morris/raphael.min.js"), "html", null, true);
         echo "\"></script>
     <script src=\"";
-        // line 112
+        // line 108
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/admin/js/plugins/morris/morris.min.js"), "html", null, true);
         echo "\"></script>
     <script src=\"";
-        // line 113
+        // line 109
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/admin/js/plugins/morris/morris-data.js"), "html", null, true);
         echo "\"></script>
     <script src=\"";
-        // line 114
+        // line 110
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/admin/js/plugins/dataTables/jquery.dataTables.js"), "html", null, true);
         echo "\"></script>
     <script src=\"";
-        // line 115
+        // line 111
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/admin/js/plugins/dataTables/dataTables.bootstrap.js"), "html", null, true);
         echo "\"></script>
     <script src=\"";
-        // line 116
+        // line 112
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/admin/js/sb-admin-2.js"), "html", null, true);
         echo "\"></script>
 ";
@@ -236,6 +232,6 @@ class __TwigTemplate_45225d640461554d18af66df68df4139351e7dddcb6276f3b5e3ac9813a
 
     public function getDebugInfo()
     {
-        return array (  222 => 116,  218 => 115,  214 => 114,  210 => 113,  206 => 112,  202 => 111,  198 => 110,  194 => 109,  190 => 107,  187 => 106,  183 => 100,  180 => 99,  174 => 25,  169 => 23,  163 => 20,  157 => 17,  151 => 14,  145 => 11,  139 => 8,  136 => 7,  133 => 6,  128 => 5,  123 => 118,  121 => 106,  114 => 101,  112 => 99,  48 => 38,  35 => 27,  33 => 6,  29 => 5,  23 => 1,);
+        return array (  218 => 112,  214 => 111,  210 => 110,  206 => 109,  202 => 108,  198 => 107,  194 => 106,  190 => 105,  186 => 103,  183 => 102,  179 => 96,  176 => 95,  170 => 25,  165 => 23,  159 => 20,  153 => 17,  147 => 14,  141 => 11,  135 => 8,  132 => 7,  129 => 6,  124 => 5,  119 => 114,  117 => 102,  110 => 97,  108 => 95,  44 => 34,  35 => 27,  33 => 6,  29 => 5,  23 => 1,  69 => 32,  59 => 23,  57 => 22,  47 => 14,  45 => 13,  36 => 7,  31 => 4,  28 => 3,);
     }
 }

@@ -157,9 +157,9 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 }
                 not_blog_admin_admin_new:
 
-                if (0 === strpos($pathinfo, '/admin/author')) {
+                if (0 === strpos($pathinfo, '/admin/blog')) {
                     // blog_admin_admin_show
-                    if (preg_match('#^/admin/author/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    if (preg_match('#^/admin/blog/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
                         if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
                             $allow = array_merge($allow, array('GET', 'HEAD'));
                             goto not_blog_admin_admin_show;
@@ -170,7 +170,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                     not_blog_admin_admin_show:
 
                     // blog_admin_admin_edit
-                    if (preg_match('#^/admin/author/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                    if (preg_match('#^/admin/blog/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
                         if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
                             $allow = array_merge($allow, array('GET', 'HEAD'));
                             goto not_blog_admin_admin_edit;
@@ -180,28 +180,16 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                     }
                     not_blog_admin_admin_edit:
 
-                    // blog_admin_admin_update
-                    if (preg_match('#^/admin/author/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
-                        if ($this->context->getMethod() != 'PUT') {
-                            $allow[] = 'PUT';
-                            goto not_blog_admin_admin_update;
-                        }
+                }
 
-                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'blog_admin_admin_update')), array (  '_controller' => 'Blog\\AdminBundle\\Controller\\AdminController::updateAction',));
-                    }
-                    not_blog_admin_admin_update:
+                // blog_admin_admin_update
+                if (0 === strpos($pathinfo, '/admin/update') && preg_match('#^/admin/update/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'blog_admin_admin_update')), array (  '_controller' => 'Blog\\AdminBundle\\Controller\\AdminController::updateAction',));
+                }
 
-                    // blog_admin_admin_delete
-                    if (preg_match('#^/admin/author/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
-                        if ($this->context->getMethod() != 'DELETE') {
-                            $allow[] = 'DELETE';
-                            goto not_blog_admin_admin_delete;
-                        }
-
-                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'blog_admin_admin_delete')), array (  '_controller' => 'Blog\\AdminBundle\\Controller\\AdminController::deleteAction',));
-                    }
-                    not_blog_admin_admin_delete:
-
+                // blog_admin_admin_delete
+                if (0 === strpos($pathinfo, '/admin/delete') && preg_match('#^/admin/delete/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'blog_admin_admin_delete')), array (  '_controller' => 'Blog\\AdminBundle\\Controller\\AdminController::deleteAction',));
                 }
 
                 // blog_admin_default_index

@@ -24,7 +24,7 @@
                         <li>
                             <a href="{{ path('blog_admin_admin_edit', { 'id': entity.id }) }}">edit</a>
                         </li>
-                        <li><a href="#">Delete</a></li>
+                        <li><a href="{{ path('blog_admin_admin_delete',{'id': entity.id }) }}">Delete</a></li>
                     </ul>
                 </td>
             </tr>
