@@ -31,7 +31,7 @@ class __TwigTemplate_45225d640461554d18af66df68df4139351e7dddcb6276f3b5e3ac9813a
     ";
         // line 6
         $this->displayBlock('stylesheets', $context, $blocks);
-        // line 27
+        // line 28
         echo "
 </head>
 <body>
@@ -40,7 +40,7 @@ class __TwigTemplate_45225d640461554d18af66df68df4139351e7dddcb6276f3b5e3ac9813a
 
     <!-- Navigation -->
     ";
-        // line 34
+        // line 35
         echo twig_include($this->env, $context, "AdminBundle:Admin:_navigation.html.twig");
         echo "
     <div id=\"page-wrapper\">
@@ -104,18 +104,18 @@ class __TwigTemplate_45225d640461554d18af66df68df4139351e7dddcb6276f3b5e3ac9813a
         <div class=\"row\">
             <div class=\"col-lg-12\">
                 ";
-        // line 95
+        // line 96
         $this->displayBlock('container', $context, $blocks);
-        // line 97
+        // line 98
         echo "
             </div>
         </div>
     </div>
 </div>
 ";
-        // line 102
+        // line 103
         $this->displayBlock('javascripts_footer', $context, $blocks);
-        // line 114
+        // line 126
         echo "</body>
 </html>";
     }
@@ -165,58 +165,76 @@ class __TwigTemplate_45225d640461554d18af66df68df4139351e7dddcb6276f3b5e3ac9813a
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/admin/font-awesome-4.1.0/css/font-awesome.min.css"), "html", null, true);
         echo "\" rel=\"stylesheet\"
               type=\"text/css\">
-        <script src=\"";
-        // line 25
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/admin/js/jquery-1.11.0.js"), "html", null, true);
-        echo "\"></script>
+
+
     ";
     }
 
-    // line 95
+    // line 96
     public function block_container($context, array $blocks = array())
     {
-        // line 96
+        // line 97
         echo "                ";
     }
 
-    // line 102
+    // line 103
     public function block_javascripts_footer($context, array $blocks = array())
     {
-        // line 103
+        // line 104
         echo "
 
     <script src=\"";
-        // line 105
+        // line 106
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/admin/js/bootstrap.min.js"), "html", null, true);
         echo "\"></script>
     <script src=\"";
-        // line 106
+        // line 107
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/admin/js/plugins/metisMenu/metisMenu.min.js"), "html", null, true);
         echo "\"></script>
     <script src=\"";
-        // line 107
+        // line 108
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/admin/js/plugins/morris/raphael.min.js"), "html", null, true);
         echo "\"></script>
     <script src=\"";
-        // line 108
+        // line 109
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/admin/js/plugins/morris/morris.min.js"), "html", null, true);
         echo "\"></script>
     <script src=\"";
-        // line 109
+        // line 110
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/admin/js/plugins/morris/morris-data.js"), "html", null, true);
         echo "\"></script>
     <script src=\"";
-        // line 110
+        // line 111
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/admin/js/plugins/dataTables/jquery.dataTables.js"), "html", null, true);
         echo "\"></script>
     <script src=\"";
-        // line 111
+        // line 112
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/admin/js/plugins/dataTables/dataTables.bootstrap.js"), "html", null, true);
         echo "\"></script>
     <script src=\"";
-        // line 112
+        // line 113
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/admin/js/sb-admin-2.js"), "html", null, true);
         echo "\"></script>
+    <script src=\"";
+        // line 114
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/admin/js/jquery-1.11.0.js"), "html", null, true);
+        echo "\"></script>
+    <script src=\"";
+        // line 115
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/admin/js/ckeditor.js"), "html", null, true);
+        echo "\"></script>
+    <script src=\"";
+        // line 116
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/admin/js/adapters/jquery.js"), "html", null, true);
+        echo "\"></script>
+    <script>
+        \$(document).ready(function () {
+           // alert(111);
+           // \$(\"textarea#blog_modelbundle_post_body\").ckeditor();
+
+
+        });
+    </script>
 ";
     }
 
@@ -232,6 +250,6 @@ class __TwigTemplate_45225d640461554d18af66df68df4139351e7dddcb6276f3b5e3ac9813a
 
     public function getDebugInfo()
     {
-        return array (  218 => 112,  214 => 111,  210 => 110,  206 => 109,  202 => 108,  198 => 107,  194 => 106,  190 => 105,  186 => 103,  183 => 102,  179 => 96,  176 => 95,  170 => 25,  165 => 23,  159 => 20,  153 => 17,  147 => 14,  141 => 11,  135 => 8,  132 => 7,  129 => 6,  124 => 5,  119 => 114,  117 => 102,  110 => 97,  108 => 95,  44 => 34,  35 => 27,  33 => 6,  29 => 5,  23 => 1,  69 => 32,  59 => 23,  57 => 22,  47 => 14,  45 => 13,  36 => 7,  31 => 4,  28 => 3,);
+        return array (  228 => 116,  224 => 115,  220 => 114,  216 => 113,  212 => 112,  208 => 111,  204 => 110,  200 => 109,  196 => 108,  192 => 107,  188 => 106,  184 => 104,  181 => 103,  177 => 97,  174 => 96,  165 => 23,  159 => 20,  153 => 17,  147 => 14,  141 => 11,  135 => 8,  132 => 7,  129 => 6,  124 => 5,  119 => 126,  117 => 103,  110 => 98,  108 => 96,  44 => 35,  35 => 28,  33 => 6,  29 => 5,  23 => 1,);
     }
 }

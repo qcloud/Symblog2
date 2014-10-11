@@ -17,7 +17,7 @@
         <div class="form-group">
             <label class="col-lg-2 control-label" for="inputName">Content</label>
 
-            <div class="col-lg-8">
+            <div id="editor" class="col-lg-8">
                 {{ form_widget(edit_form.body, {'attr': {'class': 'form-control form-control-trans','placeholder':'Content','rows':10 }}
                 ) }}
             </div>
@@ -27,7 +27,6 @@
 
             <div class="col-lg-8">
                 <input class="btn btn-default" type="submit" value="Update"/>
-                {#{{ form_widget(commentForm.send, {'attr': {'class': 'btn btn-defult'}}#}
                 {{ form_widget(edit_form._token) }}
             </div>
         </div>

@@ -192,11 +192,6 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                     return $this->mergeDefaults(array_replace($matches, array('_route' => 'blog_admin_admin_delete')), array (  '_controller' => 'Blog\\AdminBundle\\Controller\\AdminController::deleteAction',));
                 }
 
-                // blog_admin_default_index
-                if (0 === strpos($pathinfo, '/admin/hello') && preg_match('#^/admin/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'blog_admin_default_index')), array (  '_controller' => 'Blog\\AdminBundle\\Controller\\DefaultController::indexAction',));
-                }
-
             }
 
             if (0 === strpos($pathinfo, '/all')) {

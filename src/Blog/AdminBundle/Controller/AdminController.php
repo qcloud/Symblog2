@@ -14,7 +14,7 @@ class AdminController extends Controller
 {
 
     /**
-     * Lists all Author entities.
+     * Lists all Post entities.
      * @DI\Security("has_role('ROLE_USER')")
      * @DI\Route("/dashboard")
      * @DI\Method("GET")
@@ -36,12 +36,14 @@ class AdminController extends Controller
      *
      * @DI\Route("/")
      * @DI\Method("POST")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function createAction(Request $request)
     {
         $entity = new Post();
         $entity->setAuthor($this->container->get('security.context')->getToken()->getUser());
-        $form = $this->createCreateForm($entity);
+        $form = $this->createForm(new PostType(), $entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -52,10 +54,7 @@ class AdminController extends Controller
             return $this->redirect($this->generateUrl('blog_admin_admin_index'));
         }
 
-        return array(
-            'entity' => $entity,
-            'form' => $form->createView(),
-        );
+
     }
 
     /**
@@ -67,13 +66,7 @@ class AdminController extends Controller
      */
     private function createCreateForm(Post $entity)
     {
-        $form = $this->createForm(new PostType(), $entity, array(
-            'action' => $this->generateUrl('blog_admin_admin_create'),
-            'method' => 'POST',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
-
+        $form = $this->createForm(new PostType(), $entity);
         return $form;
     }
 

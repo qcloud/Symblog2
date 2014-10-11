@@ -13,6 +13,7 @@ core:
     type:     annotation
     prefix:   /all
 
+
 user:
     resource: "@ModelBundle/Resources/config/routing.yml"
     prefix:   /

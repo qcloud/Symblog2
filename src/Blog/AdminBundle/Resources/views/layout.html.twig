@@ -22,7 +22,8 @@
         <!-- Custom Fonts -->
         <link href="{{ asset('bundles/admin/font-awesome-4.1.0/css/font-awesome.min.css') }}" rel="stylesheet"
               type="text/css">
-        <script src="{{ asset('bundles/admin/js/jquery-1.11.0.js') }}"></script>
+
+
     {% endblock %}
 
 </head>
@@ -110,6 +111,17 @@
     <script src="{{ asset('bundles/admin/js/plugins/dataTables/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('bundles/admin/js/plugins/dataTables/dataTables.bootstrap.js') }}"></script>
     <script src="{{ asset('bundles/admin/js/sb-admin-2.js') }}"></script>
+    <script src="{{ asset('bundles/admin/js/jquery-1.11.0.js') }}"></script>
+    <script src="{{ asset('bundles/admin/js/ckeditor.js') }}"></script>
+    <script src="{{ asset('bundles/admin/js/adapters/jquery.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+           // alert(111);
+           // $("textarea#blog_modelbundle_post_body").ckeditor();
+
+
+        });
+    </script>
 {% endblock %}
 </body>
 </html>
