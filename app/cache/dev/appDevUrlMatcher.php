@@ -122,113 +122,6 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        if (0 === strpos($pathinfo, '/a')) {
-            if (0 === strpos($pathinfo, '/admin')) {
-                // blog_admin_admin_index
-                if ($pathinfo === '/admin/dashboard') {
-                    if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
-                        $allow = array_merge($allow, array('GET', 'HEAD'));
-                        goto not_blog_admin_admin_index;
-                    }
-
-                    return array (  '_controller' => 'Blog\\AdminBundle\\Controller\\AdminController::indexAction',  '_route' => 'blog_admin_admin_index',);
-                }
-                not_blog_admin_admin_index:
-
-                // blog_admin_admin_create
-                if ($pathinfo === '/admin/') {
-                    if ($this->context->getMethod() != 'POST') {
-                        $allow[] = 'POST';
-                        goto not_blog_admin_admin_create;
-                    }
-
-                    return array (  '_controller' => 'Blog\\AdminBundle\\Controller\\AdminController::createAction',  '_route' => 'blog_admin_admin_create',);
-                }
-                not_blog_admin_admin_create:
-
-                // blog_admin_admin_new
-                if ($pathinfo === '/admin/post/new') {
-                    if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
-                        $allow = array_merge($allow, array('GET', 'HEAD'));
-                        goto not_blog_admin_admin_new;
-                    }
-
-                    return array (  '_controller' => 'Blog\\AdminBundle\\Controller\\AdminController::newAction',  '_route' => 'blog_admin_admin_new',);
-                }
-                not_blog_admin_admin_new:
-
-                if (0 === strpos($pathinfo, '/admin/blog')) {
-                    // blog_admin_admin_show
-                    if (preg_match('#^/admin/blog/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
-                        if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
-                            $allow = array_merge($allow, array('GET', 'HEAD'));
-                            goto not_blog_admin_admin_show;
-                        }
-
-                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'blog_admin_admin_show')), array (  '_controller' => 'Blog\\AdminBundle\\Controller\\AdminController::showAction',));
-                    }
-                    not_blog_admin_admin_show:
-
-                    // blog_admin_admin_edit
-                    if (preg_match('#^/admin/blog/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
-                        if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
-                            $allow = array_merge($allow, array('GET', 'HEAD'));
-                            goto not_blog_admin_admin_edit;
-                        }
-
-                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'blog_admin_admin_edit')), array (  '_controller' => 'Blog\\AdminBundle\\Controller\\AdminController::editAction',));
-                    }
-                    not_blog_admin_admin_edit:
-
-                }
-
-                // blog_admin_admin_update
-                if (0 === strpos($pathinfo, '/admin/update') && preg_match('#^/admin/update/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'blog_admin_admin_update')), array (  '_controller' => 'Blog\\AdminBundle\\Controller\\AdminController::updateAction',));
-                }
-
-                // blog_admin_admin_delete
-                if (0 === strpos($pathinfo, '/admin/delete') && preg_match('#^/admin/delete/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'blog_admin_admin_delete')), array (  '_controller' => 'Blog\\AdminBundle\\Controller\\AdminController::deleteAction',));
-                }
-
-            }
-
-            if (0 === strpos($pathinfo, '/all')) {
-                // blog_core_author_show
-                if (0 === strpos($pathinfo, '/all/author') && preg_match('#^/all/author/(?P<slug>[^/]++)$#s', $pathinfo, $matches)) {
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'blog_core_author_show')), array (  '_controller' => 'Blog\\CoreBundle\\Controller\\AuthorController::showAction',));
-                }
-
-                // blog_core_post_index
-                if (rtrim($pathinfo, '/') === '/all') {
-                    if (substr($pathinfo, -1) !== '/') {
-                        return $this->redirect($pathinfo.'/', 'blog_core_post_index');
-                    }
-
-                    return array (  '_controller' => 'Blog\\CoreBundle\\Controller\\PostController::indexAction',  '_route' => 'blog_core_post_index',);
-                }
-
-                // blog_core_post_show
-                if (preg_match('#^/all/(?P<slug>[^/]++)$#s', $pathinfo, $matches)) {
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'blog_core_post_show')), array (  '_controller' => 'Blog\\CoreBundle\\Controller\\PostController::showAction',));
-                }
-
-                // blog_core_post_createcomment
-                if (preg_match('#^/all/(?P<slug>[^/]++)/create\\-comment$#s', $pathinfo, $matches)) {
-                    if ($this->context->getMethod() != 'POST') {
-                        $allow[] = 'POST';
-                        goto not_blog_core_post_createcomment;
-                    }
-
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'blog_core_post_createcomment')), array (  '_controller' => 'Blog\\CoreBundle\\Controller\\PostController::createCommentAction',));
-                }
-                not_blog_core_post_createcomment:
-
-            }
-
-        }
-
         if (0 === strpos($pathinfo, '/log')) {
             if (0 === strpos($pathinfo, '/login')) {
                 // fos_user_security_login
@@ -390,6 +283,110 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'FOS\\UserBundle\\Controller\\ChangePasswordController::changePasswordAction',  '_route' => 'fos_user_change_password',);
         }
         not_fos_user_change_password:
+
+        if (0 === strpos($pathinfo, '/a')) {
+            if (0 === strpos($pathinfo, '/admin')) {
+                // blog_admin_admin_index
+                if ($pathinfo === '/admin/dashboard') {
+                    if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                        $allow = array_merge($allow, array('GET', 'HEAD'));
+                        goto not_blog_admin_admin_index;
+                    }
+
+                    return array (  '_controller' => 'Blog\\AdminBundle\\Controller\\AdminController::indexAction',  '_route' => 'blog_admin_admin_index',);
+                }
+                not_blog_admin_admin_index:
+
+                // blog_admin_admin_create
+                if ($pathinfo === '/admin/') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_blog_admin_admin_create;
+                    }
+
+                    return array (  '_controller' => 'Blog\\AdminBundle\\Controller\\AdminController::createAction',  '_route' => 'blog_admin_admin_create',);
+                }
+                not_blog_admin_admin_create:
+
+                // blog_admin_admin_new
+                if ($pathinfo === '/admin/post/new') {
+                    if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                        $allow = array_merge($allow, array('GET', 'HEAD'));
+                        goto not_blog_admin_admin_new;
+                    }
+
+                    return array (  '_controller' => 'Blog\\AdminBundle\\Controller\\AdminController::newAction',  '_route' => 'blog_admin_admin_new',);
+                }
+                not_blog_admin_admin_new:
+
+                if (0 === strpos($pathinfo, '/admin/blog')) {
+                    // blog_admin_admin_show
+                    if (preg_match('#^/admin/blog/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                        if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                            $allow = array_merge($allow, array('GET', 'HEAD'));
+                            goto not_blog_admin_admin_show;
+                        }
+
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'blog_admin_admin_show')), array (  '_controller' => 'Blog\\AdminBundle\\Controller\\AdminController::showAction',));
+                    }
+                    not_blog_admin_admin_show:
+
+                    // blog_admin_admin_edit
+                    if (preg_match('#^/admin/blog/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                        if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                            $allow = array_merge($allow, array('GET', 'HEAD'));
+                            goto not_blog_admin_admin_edit;
+                        }
+
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'blog_admin_admin_edit')), array (  '_controller' => 'Blog\\AdminBundle\\Controller\\AdminController::editAction',));
+                    }
+                    not_blog_admin_admin_edit:
+
+                }
+
+                // blog_admin_admin_update
+                if (0 === strpos($pathinfo, '/admin/update') && preg_match('#^/admin/update/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'blog_admin_admin_update')), array (  '_controller' => 'Blog\\AdminBundle\\Controller\\AdminController::updateAction',));
+                }
+
+                // blog_admin_admin_delete
+                if (0 === strpos($pathinfo, '/admin/delete') && preg_match('#^/admin/delete/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'blog_admin_admin_delete')), array (  '_controller' => 'Blog\\AdminBundle\\Controller\\AdminController::deleteAction',));
+                }
+
+            }
+
+            // blog_core_author_show
+            if (0 === strpos($pathinfo, '/author') && preg_match('#^/author/(?P<slug>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'blog_core_author_show')), array (  '_controller' => 'Blog\\CoreBundle\\Controller\\AuthorController::showAction',));
+            }
+
+        }
+
+        // blog_core_post_index
+        if (rtrim($pathinfo, '/') === '') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'blog_core_post_index');
+            }
+
+            return array (  '_controller' => 'Blog\\CoreBundle\\Controller\\PostController::indexAction',  '_route' => 'blog_core_post_index',);
+        }
+
+        // blog_core_post_show
+        if (preg_match('#^/(?P<slug>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'blog_core_post_show')), array (  '_controller' => 'Blog\\CoreBundle\\Controller\\PostController::showAction',));
+        }
+
+        // blog_core_post_createcomment
+        if (preg_match('#^/(?P<slug>[^/]++)/create\\-comment$#s', $pathinfo, $matches)) {
+            if ($this->context->getMethod() != 'POST') {
+                $allow[] = 'POST';
+                goto not_blog_core_post_createcomment;
+            }
+
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'blog_core_post_createcomment')), array (  '_controller' => 'Blog\\CoreBundle\\Controller\\PostController::createCommentAction',));
+        }
+        not_blog_core_post_createcomment:
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();
     }
